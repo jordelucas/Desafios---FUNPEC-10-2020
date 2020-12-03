@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <style>
+      body {
+        overflow: hidden;
+      }
+
+      #button {
+        position: absolute;
+        z-index: 100;
+        top: 50%;
+        transform: translate(0, 0);
+
+        padding: 10px;
+        
+        text-align: center;
+        background-color: white;
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+
+        cursor: pointer;
+        outline: none;
+        transition: background .3s, transform .3s ease-out;
+
+        transform: translateX(1%);
+      }
+
+      #button:hover {
+        background-color: #f1f1f1;
+      }
+
+      #button.move-right {
+        transform: translateX(calc(100vw - 100px));
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <button id="button">click here</button>
+
+    <script>
+      const buttonElement = document.getElementById("button");
+      buttonElement.addEventListener("click", event => {
+        event.preventDefault();
+        buttonElement.classList.toggle("move-right");
+      })
+    </script>
+
+  </body>
+</html>
