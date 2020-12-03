@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta name="author" content="Jordevá Lucas & w3schools">
+
+    <style>
+      body {
+        overflow: hidden;
+      }
+
+      #button {
+        position: absolute;
+        z-index: 100;
+        top: 50%;
+        transform: translate(0, -50%);
+
+        padding: 10px;
+        
+        text-align: center;
+        background-color: white;
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+
+        cursor: pointer;
+        outline: none;
+        transition: background 0.3s;
+      }
+
+      #button:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <button id="button" onclick="onClick()">click here</button>
+
+    <script>
+      var buttonElement = document.getElementById("button");
+      buttonElement.style.left = "1%"
+      
+      function onClick(e) {
+        e = e || window.event;
+        e.preventDefault();
+
+        const config = {
+          duration: 2000,
+          easing: "cubic-bezier(0.42, 0, 0.58, 1)",
+          iterations: 1,
+        }
+        
+        if (parseInt(buttonElement.style.left) !== 1) {
+          buttonElement.animate(
+            { left: ['90%', '1%'] },
+            config,
+          )
+          buttonElement.style.left = "1%";
+          return;
+        }
+        
+        buttonElement.animate(
+          { left: ['1%', '90%']},
+          config,
+        )
+        buttonElement.style.left = "90%";
+      }
+    </script>
+
+  </body>
+</html>
