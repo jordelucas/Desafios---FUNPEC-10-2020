@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta name="author" content="Jordevá Lucas & w3schools">
+
+    <style>
+      #button {
+        position: absolute;
+        z-index: 100;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        padding: 10px;
+        
+        text-align: center;
+        background-color: white;
+        border: 1px solid #d3d3d3;
+        border-radius: 5px;
+
+        cursor: move;
+        outline: none;
+        transition: background 0.3s;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <button id="button">button</button>
+
+    <script>
+      var windowWidth;
+      var windowHeight;
+      windowSize();
+      dragElement(document.getElementById("button"));
+
+      function dragElement(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        elmnt.onmousedown = dragMouseDown;
+        
+        function dragMouseDown(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          document.onmouseup = closeDragElement;
+          document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+          pos1 = pos3 - e.clientX;
+          pos2 = pos4 - e.clientY;
+          pos3 = e.clientX;
+          pos4 = e.clientY;
+          elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+          elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+
+          changeButtonColor();
+        }
+
+        function closeDragElement() {
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+
+        function changeButtonColor() {
+          if (
+            parseInt(elmnt.style.top) <= 0.05 * windowHeight ||
+            parseInt(elmnt.style.top) >= 0.95 * windowHeight ||
+            parseInt(elmnt.style.left) <= 0.05 * windowWidth ||
+            parseInt(elmnt.style.left) >= 0.95 * windowWidth
+          ) {
+            elmnt.style.backgroundColor = "red";
+            elmnt.style.color = "white";
+          } else {
+            elmnt.style.backgroundColor = "white";
+            elmnt.style.color = "black";
+          }
+        }
+      }
+
+      function windowSize() {
+        windowWidth = window.innerWidth;
+        windowHeight = window.innerHeight;
+      };
+
+      window.addEventListener('resize', function(){
+        windowSize();
+      });
+    </script>
+
+  </body>
+</html>
