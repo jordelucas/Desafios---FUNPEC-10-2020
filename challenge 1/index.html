@@ -1,0 +1,13 @@
+<div id="app">
+  {{ mensagem }}
+</div>
+
+<script src="ClasseJS.js"></script>
+<script>
+  var app = new ClasseJS({
+    el: '#app',
+    data: { message: 'Olá Mundo!' },
+  });
+
+  app.changeText();
+</script>
